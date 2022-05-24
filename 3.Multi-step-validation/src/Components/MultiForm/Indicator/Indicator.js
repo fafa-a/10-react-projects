@@ -1,0 +1,35 @@
+import React from "react"
+import "./Indicator.css"
+import allergy from "./icons/allergy.svg"
+import diet from "./icons/diet.svg"
+import healthy from "./icons/healthy.svg"
+import love from "./icons/love.svg"
+import thumb from "./icons/thumb.svg"
+
+export default function Indicator() {
+  return (
+    <div className="container-indicator">
+      <div className="container-lines">
+        <div className="line upper-line"></div>
+        <div className="line under-line"></div>
+      </div>
+      <div className="container-img">
+        <div className="container-img">
+          <img src={healthy} alt="" />
+        </div>
+        <div className="container-img">
+          <img src={love} alt="" />
+        </div>
+        <div className="container-img">
+          <img src={allergy} alt="" />
+        </div>
+        <div className="container-img">
+          <img src={diet} alt="" />
+        </div>
+        <div className="container-img">
+          <img src={thumb} alt="" />
+        </div>
+      </div>
+    </div>
+  )
+}
