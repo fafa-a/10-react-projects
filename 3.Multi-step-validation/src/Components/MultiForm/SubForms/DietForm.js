@@ -1,9 +1,18 @@
 import React, { useState } from "react"
 import "./SubForm.css"
 
-export default function DietForm(modifyIndex) {
+export default function DietForm(props) {
+  const [formData, setFormData] = useState({
+    dietForm: "nodiet",
+  })
+
   const preventFunc = e => e.preventDefault()
-  const handleRadio = () => {}
+  const handleRadio = e => {
+    setFormData({
+      dietForm: e.target.value,
+    })
+  }
+
   return (
     <form onSubmit={preventFunc} className="diet-form">
       <p>Quel est ton régime alimentaire ?</p>
@@ -39,7 +48,7 @@ export default function DietForm(modifyIndex) {
         id="vegan"
         value="vegan"
       />
-      <button onClick={() => modifyIndex(3)}>Valider</button>
+      <button onClick={() => props.modifyIndex(3, formData)}>Valider</button>
     </form>
   )
 }
