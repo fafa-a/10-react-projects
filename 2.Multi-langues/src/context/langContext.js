@@ -1,10 +1,14 @@
-import { Children, createContext, useState } from "react"
+import { createContext, useState } from "react"
 
 export const Context = createContext()
 
 const ContextProvider = ({ children }) => {
   const [lang, setLang] = useState("EN")
-
-  return <ContextProvider value={{ lang }}>{children}</ContextProvider>
+  const ToggleLang = changelang => {
+    setLang(changelang)
+  }
+  return (
+    <ContextProvider value={{ lang, ToggleLang }}>{children}</ContextProvider>
+  )
 }
 export default ContextProvider

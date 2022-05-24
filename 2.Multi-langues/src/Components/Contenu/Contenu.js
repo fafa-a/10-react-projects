@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import React, { useContext } from "react"
 import { Context } from "../../context/langContext"
 import "./Contenu.css"
 import data from "../../assets/data"
