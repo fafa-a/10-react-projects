@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "./Slider.css"
 import dataSlider from "./dataSlider"
+import BtnSlider from "./BtnSlider"
 
 export default function Slider() {
   const [slideAnim, setSlideAnim] = useState({
@@ -8,6 +9,20 @@ export default function Slider() {
     inProgress: false,
   })
 
+  const nextSlide = () => {
+    if (slideAnim.index !== dataSlider.length) {
+      setSlideAnim({ index: slideAnim.index + 1, inProgress: true })
+    } else if (slideAnim.index === dataSlider.length) {
+      setSlideAnim({ index: 1, inProgress: true })
+    }
+  }
+  const prevSlide = () => {
+    if (slideAnim.index !== 1) {
+      setSlideAnim({ index: slideAnim.index - 1, inProgress: true })
+    } else if (slideAnim.index === 1) {
+      setSlideAnim({ index: dataSlider.length, inProgress: true })
+    }
+  }
   return (
     <div className="container-slider">
       {dataSlider.map((obj, index) => {
@@ -25,6 +40,8 @@ export default function Slider() {
           </div>
         )
       })}
+      <BtnSlider moveSlide={nextSlide} direction={"next"} />
+      <BtnSlider moveSlide={prevSlide} direction={"prev"} />
     </div>
   )
 }
