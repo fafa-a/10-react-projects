@@ -18,8 +18,8 @@ export default function BarChart({ name, data }) {
           ],
           datasets: [
             {
-              label: "Chiffres bimestriels",
-              data: fullData[2020].chart1,
+              label: name,
+              data: data,
               backgroundColor: [
                 "rgba(255, 99, 132, 0.8)",
                 "rgba(54, 162, 235, 0.8)",
