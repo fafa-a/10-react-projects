@@ -7,6 +7,20 @@ import Tools from "./ImgsSidebar/settings.svg"
 import Menu from "./ImgsSidebar/menu.svg"
 
 export default function Sidebar() {
+
+  const [chechWidth, setChecKWidth] = useState(window.innerWidth)
+  const checkWidthFunction = () => {
+    setChecKWidth(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener("resize", checkWidthFunction)
+
+    return () => {
+      window.removeEventListener("resize", checkWidthFunction)
+    }
+  }, [])
+
   return (
     <>
       <button className="toggle-nav-btn">
