@@ -1,18 +1,21 @@
 import React from "react"
 import { useContext, useRef, useState } from "react"
 import { UserContext } from "../context/userContext"
+import { useNavigate } from "react-router-dom"
 
 export default function SignUpModal() {
   const { toggleModals, modalState, signUp } = useContext(UserContext)
   const [validation, setValidation] = useState("")
-
+  const navigate = useNavigate()
   const inputs = useRef([])
   const formRef = useRef()
+
   const addInputs = el => {
     if (el && !inputs.current.includes(el)) {
       inputs.current.push(el)
     }
   }
+
   const handleForm = async e => {
     e.preventDefault()
     if (
@@ -31,6 +34,8 @@ export default function SignUpModal() {
       )
       formRef.current.reset()
       setValidation("")
+      toggleModals("close")
+      navigate("private/private-home")
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         setValidation("Email already in use")
@@ -40,10 +45,12 @@ export default function SignUpModal() {
       }
     }
   }
+
   const closeModal = () => {
     setValidation("")
     toggleModals("close")
   }
+
   return (
     <>
       {modalState.signUpModal && (
