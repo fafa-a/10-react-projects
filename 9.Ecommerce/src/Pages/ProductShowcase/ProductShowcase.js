@@ -36,6 +36,11 @@ export default function ProductShowcase() {
       }, 500)
     }
   }
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerInfo)
+    }
+  })
 
   return (
     <div className="showcase">
