@@ -3,7 +3,28 @@ import "./ShoppingCart.css"
 import { useSelector, useDispatch } from "react-redux"
 
 export default function ShoppingCart() {
+
   const storeState = useSelector(state => state)
+
+  const dispatch = useDispatch()
+
+  const handleChange = (event, id) => {
+    const indexItem = storeState.cart.findIndex(obj => obj.id === id)
+    const objUpdated = {
+      ...storeState.cart[indexItem],
+      quantity: Number(event.target.value),
+    }
+
+    dispatch({ type: "UPDATEITEM", payload: objUpdated })
+  }
+
+  let totalPrice = 0
+  if (storeState.cart.length !== 0) {
+    for (const item of storeState.cart) {
+      totalPrice += item.price * item.quantity
+    }
+  }
+
   return (
     <div className="global-container">
       <p className="heading-cart">Votre panier :</p>
@@ -17,11 +38,18 @@ export default function ShoppingCart() {
             </div>
             <div className="bloc-input">
               <label htmlFor="quantityInput">Quantité</label>
-              <input type="number" id="quantityInput" value={item.quantity} />
+              <input
+                onChange={e => handleChange(e, item.id)}
+                type="number"
+                id="quantityInput"
+                value={item.quantity}
+              />
             </div>
           </li>
         ))}
       </ul>
+      <p className="total-price">Total : {totalPrice.toFixed(2)}€</p>
+      <button className="btn-cart">Procéder au paiement</button>
     </div>
   )
 }
