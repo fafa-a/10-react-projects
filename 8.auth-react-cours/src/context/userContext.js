@@ -13,8 +13,8 @@ export function UserContextProvider({ children }) {
 
   const signUp = (email, password) =>
     createUserWithEmailAndPassword(auth, email, password)
-const signIn = (email, password) =>
-  signInWithEmailAndPassword(auth, email, password)
+  const signIn = (email, password) =>
+    signInWithEmailAndPassword(auth, email, password)
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, currentUser => {
       setCurrentUser(currentUser)
