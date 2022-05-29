@@ -1,10 +1,15 @@
 import React from "react"
-import { useContext } from "react"
+import { useContext, useRef, useState } from "react"
 import { UserContext } from "../context/userContext"
 
 export default function SignUpModal() {
   const { toggleModals, modalState } = useContext(UserContext)
-
+  const inputs = useRef([])
+  const addInputs = el => {
+    if (el && !inputs.current.includes(el)) {
+      inputs.current.push(el)
+    }
+  }
   return (
     <>
       {modalState.signUpModal && (
