@@ -31,4 +31,5 @@ export default function cartReducer(state = INITIAL_STATE, action) {
     case "UPDATEITEM":
       return {}
   }
+  return state
 }
