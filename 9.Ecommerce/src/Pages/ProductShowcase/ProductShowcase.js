@@ -13,6 +13,30 @@ export default function ProductShowcase() {
   const updateMugs = e => {
     setNbMugs(Number(e.target.value))
   }
+  const addingInfo = useRef()
+  let timerInfo
+  let display = true
+
+  const dispatch = useDispatch()
+
+  const addToCart = e => {
+    e.preventDefault()
+
+    const itemAdded = {
+      ...inventory[productClicked],
+      quantity: nbMugs,
+    }
+    dispatch({ type: "ADDITEM", payload: itemAdded })
+    addingInfo.current.innerText = "Ajouté au panier"
+    if (display) {
+      display = false
+      timerInfo = setTimeout(() => {
+        addingInfo.current.innerText = ""
+        display = true
+      }, 500)
+    }
+  }
+
   return (
     <div className="showcase">
       <div className="container-img-showcase">
@@ -25,7 +49,7 @@ export default function ProductShowcase() {
       <div className="product-infos">
         <h2>{inventory[productClicked].title}</h2>
         <p>Prix : {inventory[productClicked].price}€</p>
-        <form action="">
+        <form onSubmit={addToCart}>
           <label htmlFor="quantity">Quantité</label>
           <input
             type="number"
@@ -34,7 +58,7 @@ export default function ProductShowcase() {
             onChange={updateMugs}
           />
           <button>Ajouter au panier</button>
-          <span className="adding-info"></span>
+          <span className="adding-info" ref={addingInfo}></span>
         </form>
       </div>
     </div>
